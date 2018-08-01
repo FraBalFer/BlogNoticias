@@ -3,44 +3,33 @@
 {% block title%} Noticia {{ noticia.id }} {% endblock %}
 
 {% block contenido%}
-<section id="bricks">
 
-	<div class="row masonry">
+<section id="content-wrap" class="blog-single">
+	<div class="row">
+		<div class="col-twelve">
 
-		<!-- brick-wrapper -->
-		<div class="bricks-wrapper">
-
-			<div class="grid-sizer"></div>
-
-			<article class="brick entry format-standard animate-this">
-				<a href="{{ url_atras }}">Atrás</a>
-				<div class="entry-thumb">
-					<a href="#" class="thumb-link">
-						<img src="{{ asset(noticia.imagen) }}" alt="{{ asset(noticia.imagen) }}">             
-					</a>
+			<article class="format-standard">  
+				<div class="content-media">
+					<div class="post-thumb">
+						<a href="{{ url_atras }}">Atrás</a>
+						<img src="{{ asset(noticia.imagen) }}" alt="{{ asset(noticia.imagen) }}"> 
+					</div>  
 				</div>
 
-				<div class="entry-text">
-					<div class="entry-header">
+				<div class="primary-content">
 
-						<div class="entry-meta">
-							<span class="cat-links">
-								<p>{{noticia.fechaHora|date('d-m-Y')}}</p>           				
-							</span>			
-						</div>
+					<h1 class="page-title">{{ noticia.titulo }} </h1>	
 
-						<h1 class="entry-title"><a href="#" > {{ noticia.titulo }} </a></h1>
+					<ul class="entry-meta">
+						<li class="date">{{noticia.fechaHora|date('d-m-Y')}}</li>									
+					</ul>						
 
-					</div>
-					<div class="entry-excerpt">{{ noticia.descripcion }}</div>
+					<p class="lead">{{ noticia.descripcion }}</p> 
 				</div>
 			</article>
-		</div> <!-- end brick-wrapper --> 
-
-	</div> <!-- end row -->
-
-
-
+		</div>
+	</div>
+	
 </section> <!-- end bricks -->
 
 {% endblock %}
