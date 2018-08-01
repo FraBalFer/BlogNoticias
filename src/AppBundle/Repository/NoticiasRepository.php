@@ -14,4 +14,16 @@ class NoticiasRepository extends EntityRepository
         
         return $query->getResult();
     }
+
+
+    public function  findAll()
+    {
+    	$entityManager = $this->getEntityManager();
+
+    	$query = $entityManager->createQuery('SELECT n FROM AppBundle:Noticia n');
+        
+        return $query->getResult();
+    }
 }
+
+

@@ -50,4 +50,30 @@ class DefaultController extends Controller
     		)
     	);
     }
+
+
+
+
+    /**
+      * @Route("/noticias.{_format}", name="noticias_json_xml", requirements={"_format": "json|xml"})
+     */
+    public function tareaJsonXmlTareaAction($_format)
+    {
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Noticia');
+        $noticias = $repository->findAll();
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $json_contenido = $serializer->serialize($noticias, $_format);
+        
+        $response = new Response();
+        $response->headers->set('Content-type', 'application/'.$_format.'');
+        $response->setContent($json_contenido);
+        return $response;
+    }
+
 }
