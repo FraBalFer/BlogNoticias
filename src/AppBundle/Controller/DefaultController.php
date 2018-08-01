@@ -57,7 +57,7 @@ class DefaultController extends Controller
     /**
       * @Route("/noticias.{_format}", name="noticias_json_xml", requirements={"_format": "json|xml"})
      */
-    public function tareaJsonXmlTareaAction($_format)
+    public function tareaJsonXmlNoticiaAction($_format)
     {
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Noticia');
