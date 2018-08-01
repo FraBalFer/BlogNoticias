@@ -57,11 +57,36 @@ class DefaultController extends Controller
     /**
       * @Route("/noticias.{_format}", name="noticias_json_xml", requirements={"_format": "json|xml"})
      */
-    public function tareaJsonXmlNoticiaAction($_format)
+    public function noticiasJsonXmlNoticiaAction($_format)
     {
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:Noticia');
         $noticias = $repository->findAll();
+
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $json_contenido = $serializer->serialize($noticias, $_format);
+        
+        $response = new Response();
+        $response->headers->set('Content-type', 'application/'.$_format.'');
+        $response->setContent($json_contenido);
+        return $response;
+    }
+
+
+
+
+    /**
+      * @Route("/noticia.{_format}/{id}", name="noticias_json_xml", requirements={"_format": "json|xml", "id"="\d+"})
+     */
+    public function noticiaJsonXmlNoticiaAction($_format, $id)
+    {
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Noticia');
+        $noticias = $repository->findOneById($id);
 
         $encoders = array(new XmlEncoder(), new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
