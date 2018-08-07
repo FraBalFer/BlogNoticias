@@ -80,7 +80,7 @@ class DefaultController extends Controller
 
 
     /**
-      * @Route("/noticia.{_format}/{id}", name="noticias_json_xml", requirements={"_format": "json|xml", "id"="\d+"})
+      * @Route("/noticia.{_format}/{id}", name="noticia_json_xml", requirements={"_format": "json|xml", "id"="\d+"})
      */
     public function noticiaJsonXmlNoticiaAction($_format, $id)
     {
